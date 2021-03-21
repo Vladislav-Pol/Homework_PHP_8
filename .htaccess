@@ -1,0 +1,6 @@
+RewriteEngine on
+RewriteBase /
+# доступ только к index.php
+RewriteCond %{REQUEST_URI} !^/index.php$
+RewriteCond %{REQUEST_URI} !^(/img)|(/css)
+RewriteRule .+ 404.php
