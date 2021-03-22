@@ -20,8 +20,8 @@
     </div>
     <div class="basket">
         <img src="/img/basket.jpg" alt="basket">
-        <div class="count">55</div>
-        <div class="cost">1235 руб.</div>
+        <div class="count"><?=$basketCount?></div>
+        <div class="cost"><?=$basketCost?> руб.</div>
     </div>
 </div>
 <?php

@@ -1,18 +1,5 @@
 <?php
 
-$ch = curl_init();
-
-$arOptions = [
-    CURLOPT_URL => "https://amazon-products1.p.rapidapi.com/asin?url=https%3A%2F%2Fwww.amazon.com%2FHyperX-Cloud-Flight-Detachable-Comfortable%2Fdp%2FB077ZGRY9V%3Fpf_rd_r%3D1TYRM42Q74V7E2JPZ4WN%26pf_rd_p%3D6d2ce2da-9cfb-4c5c-ab7a-c4d61c9f9875%26pd_rd_r%3Dfe1cb1de-34f4-44e1-94fe-6adcbcedfe9c%26pd_rd_w%3DFU6ls%26pd_rd_wg%3DzQGMv%26ref_%3Dpd_gw_unk",
-    CURLOPT_RETURNTRANSFER => true,
-
-];
-curl_setopt_array($ch, $arOptions);
-
-$result = curl_exec($ch);
-
-curl_close($ch);
-
 //$errors = curl_errno($ch);
 //
 //if ($errors) {
@@ -23,6 +10,82 @@ curl_close($ch);
 
 
 ?>
-<div class="products">
-
+<div class="products content">
+    <?foreach ($arCatalogData as $item):?>
+    <div class="product"><img src=<?=$item['image']?> alt="#">
+        <h3><?=$item['title']?></h3>
+        <p class="price"><?=$item['price']?> руб.</p>
+        <a href="/?add=<?=$item['id']?>">добавить в корзину</a>
+    </div>
+    <?endforeach;?>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 2</h3>
+        <p class="price">02 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 3</h3>
+        <p class="price">03 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 4</h3>
+        <p class="price">04 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 5</h3>
+        <p class="price">05 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 6</h3>
+        <p class="price">06 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 7</h3>
+        <p class="price">07 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 8</h3>
+        <p class="price">08 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 9</h3>
+        <p class="price">09 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 10</h3>
+        <p class="price">10 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 11</h3>
+        <p class="price">11 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 12</h3>
+        <p class="price">12 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 13</h3>
+        <p class="price">13 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 14</h3>
+        <p class="price">14 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
+    <div class="product"><img src="https://via.placeholder.com/300" alt="#">
+        <h3>Товар 15</h3>
+        <p class="price">15 руб.</p>
+        <a href="/?add=#idProduct">добавить в корзину</a>
+    </div>
 </div>

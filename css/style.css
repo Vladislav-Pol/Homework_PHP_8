@@ -63,3 +63,16 @@ a{
 .header .basket .cost{
     display: inline-block;
 }
+.products{
+    display: flex;
+    flex-wrap: wrap;
+}
+.product{
+    width: calc(33.33% - 40px);
+    margin: 20px;
+}
+.product img{
+    width: 100%;
+    object-fit: contain;
+    height: 350px;
+}
