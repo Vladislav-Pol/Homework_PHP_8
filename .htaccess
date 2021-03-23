@@ -1,6 +1,15 @@
 RewriteEngine on
 RewriteBase /
+
+RewriteRule cart index.php?cart=
+
 # доступ только к index.php
 RewriteCond %{REQUEST_URI} !^/index.php$
-RewriteCond %{REQUEST_URI} !^(/img)|(/css)
+RewriteCond %{REQUEST_URI} !^(/img)|(/css)|(cart/$)
 RewriteRule .+ 404.php
+
+#DedirectMatch .* index.php
+
+
+#RewriteRule ^catalog/([a-z]+)?/?([0-9]+)?/?.+ index.php?category=$1&id=$2
+

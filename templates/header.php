@@ -14,11 +14,12 @@
         <span>Мир товаров</span>
     </div>
     <div class="nav">
-        <a href="#">Главная</a>
+        <a href="/">Главная</a>
         <a href="#">Корзина</a>
         <a href="#">Контакты</a>
     </div>
     <div class="basket">
+        <a href="http://localhost/cart/"></a>
         <img src="/img/basket.jpg" alt="basket">
         <div class="count"><?=$basketCount?></div>
         <div class="cost"><?=$basketCost?> руб.</div>

@@ -18,3 +18,6 @@ if(isset($_REQUEST['add'])){
 }
 
 
+$mainTemplate = './templates/main.php';
+if(isset($_REQUEST['cart']))
+    $mainTemplate = './templates/basket.php';
