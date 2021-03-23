@@ -5,6 +5,8 @@ function getCatalogData($arOptions)
     curl_setopt_array($ch, $arOptions);
     $result = curl_exec($ch);
     curl_close($ch);
+    if ($result == "null")
+        return false;
     $arResult = json_decode($result, true);
     fixUrlInData($arResult);
     return $arResult;
@@ -12,36 +14,29 @@ function getCatalogData($arOptions)
 
 function fixUrlInData(&$arData)
 {
-    if(key_exists('image', $arData))
+    if (key_exists('image', $arData))
         $arData['image'] = str_replace("fakestoreapi.com", "fakestoreapi.herokuapp.com", $arData['image'])
             ?: "https://via.placeholder.com/200";
     else
         foreach ($arData as &$item)
-        $item['image'] = str_replace("fakestoreapi.com", "fakestoreapi.herokuapp.com", $item['image'])
-            ?: "https://via.placeholder.com/200";
+            $item['image'] = str_replace("fakestoreapi.com", "fakestoreapi.herokuapp.com", $item['image'])
+                ?: "https://via.placeholder.com/200";
 }
 
-function addToCart($cartData, $addItem)
+function addToCart(&$cartData, $addItem)
 {
-    if ($cartData) {
-        $cartData[$addItem] = ++$cartData[$addItem] ?? 1;
-        setcookie('cart', serialize($cartData));
-    } else
-        setcookie('cart', serialize([$addItem => 1]));
-
-    $GLOBALS['cartCount']++;
-    $GLOBALS['cartCost'] += getProductDataById($addItem)['price'];
-}
-
-function delFromCart($cartData, $delItem)
-{
-    if ($cartData) {
-        $cartData[$addItem] = ++$cartData[$addItem] ?? 1;
+    if (($product = getProductDataById($addItem)) != false) {
+        ++$cartData[$addItem];
         setcookie('cart', serialize($cartData));
     }
+}
 
-    $GLOBALS['cartCount']++;
-    $GLOBALS['cartCost'] += getProductDataById($addItem)['price'];
+function delFromCart(&$cartData, $delItem)
+{
+    if ($cartData) {
+        unset($cartData[$delItem]);
+    }
+    setcookie('cart', serialize($cartData));
 }
 
 function getCartCount($cartData)
@@ -71,11 +66,12 @@ function getProductDataById($id)
     return getCatalogData($arOptionsLoc);
 }
 
-function getFullCartData($cartData){
-    if(!is_array($cartData))
+function getFullCartData($cartData)
+{
+    if (!is_array($cartData))
         return false;
     $fullCartData = [];
-    foreach($cartData as $id => $count){
+    foreach ($cartData as $id => $count) {
         $cartItem = getProductDataById($id);
         $cartItem['count'] = $count;
         $cartItem['cost'] = $cartItem['price'] * $count;

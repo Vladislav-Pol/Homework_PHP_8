@@ -15,11 +15,11 @@
     </div>
     <div class="nav">
         <a href="/">Главная</a>
-        <a href="http://localhost/cart/">Корзина</a>
+        <a href="/cart/">Корзина</a>
         <a href="#">Контакты</a>
     </div>
     <div class="cart">
-        <a href="http://localhost/cart/"></a>
+        <a href="/cart/"></a>
         <img src="/img/cart.jpg" alt="cart">
         <div class="count"><?=$cartCount?></div>
         <div class="cost"><?=$cartCost?> руб.</div>
