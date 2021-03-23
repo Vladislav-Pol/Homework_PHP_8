@@ -10,8 +10,10 @@
 <body>
 <div class="header content">
     <div class="logo">
-        <img src="/img/free.png" alt="logo">
-        <span>Мир товаров</span>
+        <a href="/">
+            <img src="/img/free.png" alt="logo">
+            <span>Мир товаров</span>
+        </a>
     </div>
     <div class="nav">
         <a href="/">Главная</a>

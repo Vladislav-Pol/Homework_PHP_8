@@ -37,6 +37,7 @@ function delFromCart(&$cartData, $delItem)
         unset($cartData[$delItem]);
     }
     setcookie('cart', serialize($cartData));
+    header('Location: /cart');
 }
 
 function getCartCount($cartData)

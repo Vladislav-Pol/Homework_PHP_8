@@ -6,7 +6,7 @@ RewriteRule cart index.php?cart=
 
 # доступ только к index.php
 RewriteCond %{REQUEST_URI} !^/index.php$
-RewriteCond %{REQUEST_URI} !^(/img)|(/css)|(cart/$)
+RewriteCond %{REQUEST_URI} !^(/img)|(/css)|(cart[/]?$)
 RewriteRule .+ 404.php
 
 #DedirectMatch .* index.php
