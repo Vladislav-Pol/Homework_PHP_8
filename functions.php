@@ -5,51 +5,81 @@ function getCatalogData($arOptions)
     curl_setopt_array($ch, $arOptions);
     $result = curl_exec($ch);
     curl_close($ch);
-
-    return json_decode($result, true);
+    $arResult = json_decode($result, true);
+    fixUrlInData($arResult);
+    return $arResult;
 }
 
 function fixUrlInData(&$arData)
 {
-    foreach ($arData as &$item)
+    if(key_exists('image', $arData))
+        $arData['image'] = str_replace("fakestoreapi.com", "fakestoreapi.herokuapp.com", $arData['image'])
+            ?: "https://via.placeholder.com/200";
+    else
+        foreach ($arData as &$item)
         $item['image'] = str_replace("fakestoreapi.com", "fakestoreapi.herokuapp.com", $item['image'])
             ?: "https://via.placeholder.com/200";
-
 }
 
-function addToBasket($addItem)
+function addToCart($cartData, $addItem)
 {
-    if ($_COOKIE['basket']) {
-        $basketData = unserialize($_COOKIE['basket']);
-        $basketData[$addItem] = ++$basketData[$addItem] ?? 1;
-        setcookie('basket', serialize($basketData));
+    if ($cartData) {
+        $cartData[$addItem] = ++$cartData[$addItem] ?? 1;
+        setcookie('cart', serialize($cartData));
     } else
-        setcookie('basket', serialize([$addItem => 1]));
+        setcookie('cart', serialize([$addItem => 1]));
+
+    $GLOBALS['cartCount']++;
+    $GLOBALS['cartCost'] += getProductDataById($addItem)['price'];
 }
 
-function getBasketCount()
+function delFromCart($cartData, $delItem)
+{
+    if ($cartData) {
+        $cartData[$addItem] = ++$cartData[$addItem] ?? 1;
+        setcookie('cart', serialize($cartData));
+    }
+
+    $GLOBALS['cartCount']++;
+    $GLOBALS['cartCost'] += getProductDataById($addItem)['price'];
+}
+
+function getCartCount($cartData)
 {
     $sum = 0;
-    $basketData = unserialize($_COOKIE['basket']);
-    foreach ($basketData as $count)
-        $sum += $count;
+    if (is_array($cartData))
+        foreach ($cartData as $count)
+            $sum += $count;
     return $sum;
 }
 
-function getBasketCost()
+function getCartCost($cartData)
 {
     $sum = 0;
-    $basketData = unserialize($_COOKIE['basket']);
-    foreach ($basketData as $id => $count)
-        $sum += getPriceById($id) * $count;
+    if (is_array($cartData))
+        foreach ($cartData as $id => $count)
+            $sum += getProductDataById($id)['price'] * $count;
     return $sum;
 }
 
-function getPriceById($id)
+function getProductDataById($id)
 {
     $arOptionsLoc = [
         CURLOPT_URL => "https://fakestoreapi.herokuapp.com/products/$id",
         CURLOPT_RETURNTRANSFER => true,
     ];
-    return getCatalogData($arOptionsLoc)['price'];
+    return getCatalogData($arOptionsLoc);
+}
+
+function getFullCartData($cartData){
+    if(!is_array($cartData))
+        return false;
+    $fullCartData = [];
+    foreach($cartData as $id => $count){
+        $cartItem = getProductDataById($id);
+        $cartItem['count'] = $count;
+        $cartItem['cost'] = $cartItem['price'] * $count;
+        $fullCartData[] = $cartItem;
+    }
+    return $fullCartData;
 }

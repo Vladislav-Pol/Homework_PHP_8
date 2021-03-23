@@ -6,18 +6,21 @@ $arOptions = [
     CURLOPT_RETURNTRANSFER => true,
 ];
 
-$arCatalogData = getCatalogData($arOptions);
-fixUrlInData($arCatalogData);
 
-$basketCount = getBasketCount();
-$basketCost = getBasketCost();
-if(isset($_REQUEST['add'])){
-    addToBasket($_REQUEST['add']);
-    $basketCount++;
-    $basketCost += getPriceById($_REQUEST['add']);
+$cartData = unserialize($_COOKIE['cart']);
+if (isset($_GET['del']))
+    delFromCart($cartData, $_GET['del']);
+$cartCount = getCartCount($cartData);
+$cartCost = getCartCost($cartData);
+if (isset($_GET['add']))
+    addToCart($cartData, $_GET['add']);
+
+if (isset($_GET['cart'])) {
+    $fullCartData = getFullCartData($cartData);
+    $mainTemplate = './templates/cart.php';
+} else {
+    $arCatalogData = getCatalogData($arOptions);
+    $mainTemplate = './templates/main.php';
 }
 
 
-$mainTemplate = './templates/main.php';
-if(isset($_REQUEST['cart']))
-    $mainTemplate = './templates/basket.php';

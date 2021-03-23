@@ -1,6 +1,7 @@
 RewriteEngine on
 RewriteBase /
 
+RewriteCond %{REQUEST_URI} ^/cart
 RewriteRule cart index.php?cart=
 
 # доступ только к index.php

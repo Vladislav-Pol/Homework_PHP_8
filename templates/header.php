@@ -15,14 +15,14 @@
     </div>
     <div class="nav">
         <a href="/">Главная</a>
-        <a href="#">Корзина</a>
+        <a href="http://localhost/cart/">Корзина</a>
         <a href="#">Контакты</a>
     </div>
-    <div class="basket">
+    <div class="cart">
         <a href="http://localhost/cart/"></a>
-        <img src="/img/basket.jpg" alt="basket">
-        <div class="count"><?=$basketCount?></div>
-        <div class="cost"><?=$basketCost?> руб.</div>
+        <img src="/img/cart.jpg" alt="cart">
+        <div class="count"><?=$cartCount?></div>
+        <div class="cost"><?=$cartCost?> руб.</div>
     </div>
 </div>
 <?php
