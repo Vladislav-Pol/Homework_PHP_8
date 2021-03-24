@@ -18,9 +18,11 @@ $cartCost = getCartCost($cartData);
 if (isset($_GET['cart'])) {
     $fullCartData = getFullCartData($cartData);
     $mainTemplate = './templates/cart.php';
+    $title = "Корзина";
 } else {
     $arCatalogData = getCatalogData($arOptions);
     $mainTemplate = './templates/main.php';
+    $title = "Главная страница";
 }
 
 
