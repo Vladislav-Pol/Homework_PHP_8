@@ -1,13 +1,16 @@
 <?php
 require_once 'functions.php';
 
+define('BD_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bd/products.json');
+define('TIME_ACTUAL_DB', '120');
 $arOptions = [
     CURLOPT_URL => "https://fakestoreapi.herokuapp.com/products",
     CURLOPT_RETURNTRANSFER => true,
 ];
 
-
-$cartData = unserialize($_COOKIE['cart']);
+if(isset($_COOKIE['cart'])){
+    $cartData = unserialize($_COOKIE['cart']);
+}
 if (intval($_GET['del']))
     delFromCart($cartData, $_GET['del']);
 if (intval($_GET['add']))
@@ -15,14 +18,7 @@ if (intval($_GET['add']))
 $cartCount = getCartCount($cartData);
 $cartCost = getCartCost($cartData);
 
-if (isset($_GET['cart'])) {
-    $fullCartData = getFullCartData($cartData);
-    $mainTemplate = './templates/cart.php';
-    $title = "Корзина";
-} else {
-    $arCatalogData = getCatalogData($arOptions);
-    $mainTemplate = './templates/main.php';
-    $title = "Главная страница";
-}
+
+
 
 
