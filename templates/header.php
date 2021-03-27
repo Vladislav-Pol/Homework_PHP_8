@@ -1,30 +1,41 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-    <title><?=$title?></title>
+    <link rel="stylesheet" href="/css/media.css">
+    <title><?= isset($_GET["id"]) ? $arPages[$_GET["id"]]["name"]: "Treehouse"?></title>
 </head>
 <body>
-<div class="header content">
+<header class="content">
     <div class="logo">
-        <a href="/">
-            <img src="/img/free.png" alt="logo">
-            <span>Мир товаров</span>
-        </a>
+        <a href="/"></a>
+        <div class="logo_pic">
+            <img src="/image/leaf.png" alt="Logo leaf">
+        </div>
+        <span>Treehouse</span>
     </div>
-    <div class="nav">
-        <a href="/">Главная</a>
-        <a href="/cart/">Корзина</a>
-        <a href="#">Контакты</a>
+    <input type="checkbox" id="burgerCheck">
+    <div class="burger_menu">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
+    <ul class="nav">
+        <?foreach($arMenu as $link => $name):?>
+        <li><a href="<?=$link?>"><?=$name?></a></li>
+        <?endforeach;?>
+    </ul>
     <div class="cart">
-        <a href="/cart/"></a>
-        <img src="/img/cart.jpg" alt="cart">
-        <div class="count"><?=$cartCount?></div>
-        <div class="cost"><?=$cartCost?> руб.</div>
-    </div>
-</div>
+                <a href="/cart/"></a>
+                <img src="/image/shopping-cart.png" alt="cart">
+                <div class="count"><?=$cartCount?></div>
+                <div class="cost"><?=$cartCost?> руб.</div>
+            </div>
+</header>
+<main>
 <?php
+

@@ -4,6 +4,7 @@ require_once './data.php';
 
 updateLocalBase($arOptions);
 $arCatalogData = getLocalCatalogData();
+addLinkDetail($arCatalogData);
 //$arCatalogData = getCatalogData($arOptions);
 $title = "Главная страница";
 

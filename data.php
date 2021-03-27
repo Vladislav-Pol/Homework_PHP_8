@@ -1,12 +1,19 @@
 <?php
-require_once 'functions.php';
-
-define('BD_PATH', $_SERVER['DOCUMENT_ROOT'] . '/bd/products.json');
+define ('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
+define('BD_PATH', DOCUMENT_ROOT . '/bd/products.json');
 define('TIME_ACTUAL_DB', '120');
 $arOptions = [
     CURLOPT_URL => "https://fakestoreapi.herokuapp.com/products",
     CURLOPT_RETURNTRANSFER => true,
 ];
+$arMenu = [
+    '/' => 'Главная',
+    '/catalog/' => 'Каталог',
+    '/cart/' => 'Корзина',
+    '#' => 'Контакты',
+    ];
+require_once 'functions.php';
+
 
 if(isset($_COOKIE['cart'])){
     $cartData = unserialize($_COOKIE['cart']);

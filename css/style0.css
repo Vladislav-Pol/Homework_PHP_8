@@ -8,6 +8,11 @@ a{
     text-decoration: none;
     color: black;
 }
+body{
+    background: linear-gradient(-45deg, #003333 10%, #000033);
+    color: #cc9966;
+    font-family: 'Poppins';
+}
 .content{
     width: 85vw;
     margin-left: auto;

@@ -25,10 +25,11 @@ function fixUrlInData(&$arData)
 
 function addToCart(&$cartData, $addItem)
 {
-    if (($product = getProductDataById($addItem)) != false) {
+    if (($product = getLocalCatalogData($addItem)) != false) {
         ++$cartData[$addItem];
-        setcookie('cart', serialize($cartData));
+        setcookie('cart', serialize($cartData), 0, '/');
     }
+    header('Location: /catalog');
 }
 
 function delFromCart(&$cartData, $delItem)
@@ -36,7 +37,7 @@ function delFromCart(&$cartData, $delItem)
     if ($cartData) {
         unset($cartData[$delItem]);
     }
-    setcookie('cart', serialize($cartData));
+    setcookie('cart', serialize($cartData), 0, '/');
     header('Location: /cart');
 }
 
@@ -56,11 +57,8 @@ function getCartCost($cartData)
 
 function getProductDataById($id)
 {
-   $arOptionsLoc = [
-        CURLOPT_URL => "https://fakestoreapi.herokuapp.com/products/$id",
-        CURLOPT_RETURNTRANSFER => true,
-    ];
-    return getCatalogData($arOptionsLoc);
+    updateLocalBase($GLOBALS['arOptions']);
+    return getLocalCatalogData($id);
 }
 
 function getFullCartData($cartData)
@@ -115,5 +113,23 @@ function getLocalCatalogData($id = false)
 {
     $jsonData = file_get_contents(BD_PATH);
     $data = json_decode($jsonData, true);
-    return $id === false ? $data : $data[$id];
+    if($id === false){
+        return $data;
+    }
+    foreach ($data as $item) {
+        if($item['id'] == $id){
+            return $item;
+        }
+    }
+    return false;
+}
+
+function addLinkDetail(&$arCatalogData)
+{
+    foreach ($arCatalogData as &$product){
+        $title = trim($product['title']);
+        $title = mb_strtolower($title);
+        $linkDetail = preg_replace('/\W/', '_', $title) . "_" . $product['id'];
+        $product['linkDetail'] = $linkDetail;
+    }
 }
