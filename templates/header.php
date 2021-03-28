@@ -29,6 +29,14 @@
         <li><a href="<?=$link?>"><?=$name?></a></li>
         <?endforeach;?>
     </ul>
+    <div class="auth">
+        <? if(!$userAuth):?>
+        <a href="/auth">Войти или зарегистрироваться</a>
+        <? else:?>
+        <p>Здравствуйте, <?=$_SESSION['user']['name']?></p>
+        <a href="./?logout">Выйти</a>
+        <? endif;?>
+    </div>
     <div class="cart">
                 <a href="/cart/"></a>
                 <img src="/image/shopping-cart.png" alt="cart">

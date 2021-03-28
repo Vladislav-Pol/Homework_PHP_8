@@ -2,6 +2,10 @@
 
 require_once '../data.php';
 
+//if(isset($_REQUEST['order'])){
+//    sendOrder();
+//}
+
 $fullCartData = getFullCartData($cartData);
 $title = "Корзина";
 

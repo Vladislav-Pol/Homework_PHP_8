@@ -133,3 +133,23 @@ function addLinkDetail(&$arCatalogData)
         $product['linkDetail'] = $linkDetail;
     }
 }
+
+//function sendOrder()
+//{
+//    mail("rakuvka@gmail.com", "Загаловок", "Текст письма \n 1-ая строчка \n 2-ая строчка \n 3-ая строчка");
+//}
+
+function checkAuth(){
+    if(!$_COOKIE['auth']){
+        return false;
+    }
+    session_id($_COOKIE['auth']);
+    session_start();
+    return $_SESSION['user']['auth'];
+}
+function logout()
+{
+    session_start();
+    unset($_COOKIE['auth'], $_SESSION['user']);
+    header('Location: ./');
+}

@@ -1,6 +1,7 @@
 <?php
 define ('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('BD_PATH', DOCUMENT_ROOT . '/bd/products.json');
+define('USERS_PATH', DOCUMENT_ROOT . '/bd/users.json');
 define('TIME_ACTUAL_DB', '120');
 $arOptions = [
     CURLOPT_URL => "https://fakestoreapi.herokuapp.com/products",
@@ -14,6 +15,14 @@ $arMenu = [
     ];
 require_once 'functions.php';
 
+if(isset($_REQUEST['logout']))
+    logout();
+
+$userAuth = checkAuth();
+
+//Если не авторизован - показывать кнопку войти
+//Иначе приветствовать пользователя
+// и если пользователь из группы администраторов показывать кнопку перехода в админку
 
 if(isset($_COOKIE['cart'])){
     $cartData = unserialize($_COOKIE['cart']);
