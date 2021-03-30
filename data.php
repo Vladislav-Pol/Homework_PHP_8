@@ -19,6 +19,17 @@ if(isset($_REQUEST['logout']))
     logout();
 
 $userAuth = checkAuth();
+$userGroups = ($_SESSION['user']['groups']) ?? [];
+
+if($userAuth){
+    if (in_array('admin', $userGroups)){
+        $arMenu['/admin'] = 'Админка';
+    }
+    $arMenu['./?logout'] = 'Выйти';
+}
+else{
+    $arMenu['/auth'] = 'Авторизоваться';
+}
 
 //Если не авторизован - показывать кнопку войти
 //Иначе приветствовать пользователя

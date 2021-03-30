@@ -1,0 +1,620 @@
+@font-face{
+
+    font-family: 'Myriad Pro';
+    src: url('/fonts/MyriadPro.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Slab";
+    font-size: 16px;
+}
+a{
+    text-decoration: none;
+}
+.content{
+    max-width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+}
+header{
+    height: 115px;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.logo a{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.logo_pic{
+    background-color: #66cc66;
+    border-radius: 50%;
+    width: 1.875em;
+    height: 1.875em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo span{
+    font-size: 1.125em;
+    font-family: "Montserrat";
+    color: rgb(85, 85, 85);
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-left: 5px;
+}
+.burger_menu{
+    z-index: 2;
+}
+.burger_menu, input[type = checkbox]#burgerCheck{
+    position: absolute;
+    height: 40px;
+    width: 50px;
+    top: 24px;
+    right: 0;
+    display: none;
+}
+.burger_menu span{
+    width: 100%;
+    height: 10px;
+    background-color: #333333;
+    position: absolute;
+}
+input[type = checkbox]:checked ~ .burger_menu span{
+    background-color: #fff;
+}
+.burger_menu span {
+    transition: background-color 1s linear;
+}
+.burger_menu span:nth-child(1){
+    top: 0;
+}
+input[type = checkbox]:checked ~ .burger_menu span:nth-child(1){
+    transform: rotate(-45deg);
+    top: 16px;
+}
+.burger_menu span:nth-child(2){
+    top: 15px;
+}
+input[type = checkbox]:checked ~ .burger_menu span:nth-child(2){
+    transform: rotate(45deg);
+    top: 16px;
+}
+.burger_menu span:nth-child(3){
+    top: 30px;
+}
+input[type = checkbox]:checked ~ .burger_menu span:nth-child(3){
+    visibility: hidden;
+}
+input[type = checkbox]#burgerCheck{
+    opacity: 0;
+    z-index: 3;
+}
+
+input[type = checkbox]:checked ~ .nav{
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+    left: 0;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+}
+input[type = checkbox]:checked ~ .nav li{
+    margin: 30px 0 0;
+}
+input[type = checkbox]:checked ~ .nav li a{
+    padding: 15px;
+    background-color: #ddd;
+    width: 150px;
+    display: inline-block;
+    text-align: center;
+}
+input[type = checkbox]:checked ~ .nav li a:hover{
+    background-color: #fff;
+
+}
+ul.nav{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+ul.nav li a{
+    font-size: 0.875em;
+    font-family: "Montserrat";
+    color: rgb(34, 34, 34);
+    text-transform: uppercase;
+    text-decoration: none;
+}ul.nav li a:hover{
+    color: rgb(119, 119, 119);
+}
+ul.nav li:not(:last-child){
+    margin-right: 35px;
+}
+header .cart{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+header .cart a{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+header .cart img{
+    height: 1.5em;
+}
+header .cart .count{
+    width: 1.5em;
+    position: absolute;
+    top: 30px;
+    text-align: center;
+    font-size: 0.875em;
+    font-family: "Montserrat";
+    color: rgb(34, 34, 34);
+}
+header .cart .cost{
+    font-size: 0.875em;
+    font-family: "Montserrat";
+    color: rgb(34, 34, 34);
+    padding-left: 10px;
+}
+main{
+    min-height: calc(100vh - 558px);
+}
+.portfolio{
+    background: rgba(0, 0, 0, 0.75) url(/image/Background.png);
+    background-blend-mode: multiply;
+    height: 530px;
+    background-size: cover;
+    text-align: center;
+}
+.portfolio h1{
+    font-size: 3.75em;
+    font-family: "Montserrat";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-top: 120px;
+}
+.portfolio h3{
+    font-size: 1.25em;
+    color: rgb(204, 204, 204);
+    padding-top: 40px;
+}
+a.button{
+    font-size: 0.94em;
+    font-family: "Montserrat";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.7);
+    background-color: #66cc66;
+    border-radius: 30px;
+    display: inline-block;
+    padding: 23px 35px;
+    margin-top: 60px;
+}
+a.button:hover{
+    color: rgb(34, 34, 34);
+    background-color: #FFF;
+
+}
+.services .title,
+.latest_projects .title{
+    text-align: center;
+}
+.services .title h2,
+.latest_projects .title h2{
+    font-size: 2.5em;
+    font-family: "Montserrat";
+    color: rgb(34, 34, 34);
+    font-weight: bold;
+    text-transform: uppercase;
+    padding-top: 100px;
+}
+.services .title h3,
+.latest_projects .title h3{
+    font-size: 1.25em;
+    color: rgb(119, 119, 119);
+    padding-top: 20px;
+}
+.services .items{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 85px;
+}
+.services .items .block {
+    text-align: center;
+}
+.services .items .block .image{
+    height: 52px;
+}
+.services .items h3,
+.latest_projects h3.uppercase{
+    font-size: 1.125em;
+    font-family: "Montserrat";
+    color: rgb(34, 34, 34);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+.services .items p{
+    font-size: 0.875em;
+    font-family: "Myriad Pro";
+    color: rgb(119, 119, 119);
+    line-height: 1.2;
+    margin-top: 20px;
+    padding-bottom: 100px;
+}
+.advantages{
+    background: rgba(0, 0, 0, 0.75) url(/image/Background2.png);
+    background-blend-mode: multiply;
+    height: 615px;
+    background-size: cover;
+    text-align: left;
+
+}
+.advantages h2{
+    font-size: 2.5em;
+    font-family: "Montserrat";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding-top: 100px;
+}
+.advantages h2 span{
+    font-size: 1em;
+    color: #66cc66;
+}
+.advantages p{
+    font-family: "Myriad Pro";
+    color: rgb(204, 204, 204);
+    line-height: 1.2;
+    max-width: 440px;
+    padding-top: 45px;
+    padding-bottom: 10px;
+}
+.advantages .content .list .line{
+    display: flex;
+    align-items: center;
+}
+.advantages .content .list .circle{
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: solid 2px #fff;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+.advantages .content .list span{
+    color: rgb(204, 204, 204);
+    padding-left: 20px;
+}
+.latest_projects{
+    background-image: url("/image/iPad_Air.png");
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+}
+.latest_projects p{
+    color: rgb(119, 119, 119);
+    line-height: 1.2;
+    max-width: 410px;
+    padding-top: 22px;
+}
+.latest_projects .list .element{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+}
+.latest_projects .list .element .circle{
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: solid 4px #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+.latest_projects .list .element .text p{
+    padding-top: 0;
+}
+.latest_projects .link{
+    padding-top: 30px;
+    padding-bottom: 100px;
+}
+.latest_projects .link a{
+    font-family: "Montserrat";
+    color: rgb(124, 197, 118);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.latest_projects .link a::after{
+    content: url("/image/Arrow-Right.png");
+    padding-left: 8px;
+}
+.latest_projects .link a:hover{
+    color: rgb(34, 34, 34);
+}
+.latest_projects .link a:hover::after{
+    content: url("/image/Arrow-Right-Hover.png");
+    padding-left: 8px;
+}
+.footer .top_footer{
+    background-color: #333333;
+}
+.footer .top_footer .content{
+    padding-top: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.top_footer .left, .top_footer .column {
+    padding-top: 20px;
+}
+.footer .top_footer .column h3{
+    font-size: 1.125em;
+    font-family: "Montserrat";
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+}
+.footer .top_footer .column .list{
+    display: flex;
+    align-items: center;
+    margin-bottom: 18px;
+}
+.footer .top_footer .column.left p{
+    color: rgb(236, 236, 236);
+    line-height: 1.2;
+    margin-left: 15px;
+    max-width: 165px;
+}
+.footer .top_footer .column.middle img{
+    width: 26px;
+}
+.footer .top_footer .column.middle a{
+    color: rgb(236, 236, 236);
+    line-height: 1.2;
+    margin-left: 15px;
+    text-decoration: none;
+}
+.footer .top_footer .column.middle a:hover{
+    color: rgb(124, 197, 118);
+}
+.footer .top_footer .column.right .list{
+    align-items: flex-start;
+}
+.footer .top_footer .column.right p{
+    color: rgb(236, 236, 236);
+    line-height: 1.375;
+    max-width: 240px;
+    margin-left: 15px;
+}
+.footer .top_footer .column.right a{
+    text-decoration: none;
+    color: rgb(236, 236, 236);
+    line-height: 1.375;
+    /*max-width: 240px;*/
+    /*margin-left: 15px;*/
+}
+.footer .top_footer .column.right p:hover a{
+    color: rgb(124, 197, 118);
+}
+.footer .top_footer .column.right .list .small{
+    font-size: 0.8em;
+}
+
+
+
+.footer .bottom_footer p{
+    font-size: 0.875em;
+    font-family: "Montserrat";
+    color: rgb(85, 85, 85);
+    padding: 45px 0;
+}
+.footer .bottom_footer{
+    position: relative;
+}
+.footer .bottom_footer .social{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.footer .bottom_footer .round{
+    background-color: #333333;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.footer .bottom_footer .round.tw:hover{
+    background-color: #0099ff;
+}
+.footer .bottom_footer .round.fb:hover{
+    background-color: #336699;
+}
+.footer .bottom_footer .round.pn:hover{
+    background-color: #cc3333;
+}
+.footer .bottom_footer .round.gg:hover{
+    background-color: #cc3300;
+}
+
+/*Page Contacts*/
+.contactsForm{
+    border-radius: 5px;
+    border: 2px solid grey;
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 30px auto;
+    padding: 10px;
+}
+.contactsForm textarea[name = "message"]{
+    resize: none;
+}
+form.content.contactsForm label,
+form.content.contactsForm button {
+    margin-top: 10px;
+}
+
+/*Page Products*/
+.products{
+    display: flex;
+    flex-wrap: wrap;
+}
+.product{
+    width: calc(33.33% - 40px);
+    margin: 20px;
+    box-shadow: 3px 6px 12px 1px gray;
+}
+.product .info{
+    margin: 0 10px;
+
+}
+.product h3{
+    text-align: center;
+    color: white;
+    background: #333;
+    border-radius: 6px;
+    margin-bottom: 5px;
+}
+.product .price{
+    font-style: italic;
+    font-weight: bold;
+}
+.product .image img{
+    width: 100%;
+    object-fit: contain;
+    height: 350px;
+}
+.product .info p,
+.product .info a,
+.product .info img{
+    display: inline;
+}
+.product .info img{
+    height: 2em;
+    padding-left: 20px;
+}
+.product .info img:hover {
+    transform: scale(1.2);
+}
+
+.product_detail{
+    width: 100%;
+    margin: 20px;
+    box-shadow: 3px 6px 12px 1px gray;
+    display: flex;
+}
+.product_detail .image{
+    width: 50%;
+}
+.product_detail .image img{
+    width: 100%;
+    object-fit: contain;
+}
+.product_detail .info{
+    width: 50%;
+    margin: 60px 20px;
+    text-align: center;
+}
+.product_detail .info p,
+.product_detail .info a,
+.product_detail .info img,
+.product_detail .info .description{
+    padding-top: 20px;
+}
+.product_detail .info img{
+    height: 2em;
+    padding-left: 20px;
+}
+.product_detail .info img:hover {
+    transform: scale(1.2);
+}
+
+
+/*Page cart*/
+.topLine, .bottomLine{
+    border: 1px solid #333;
+    width: 100%;
+    height: 10px;
+    border-bottom: none;
+    border-radius: 10px 10px 0 0;
+    background-color: #333;
+}
+.bottomLine{
+    border-radius: 0 0 10px 10px;
+    margin-bottom: 10px;
+}
+.delete{
+    color: red;
+}
+.cart_product{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.cart_product .image{
+    width: 8%;
+    margin-right: 2%;
+}
+.cart_product .image img{
+    height: 5em;
+    width: 100%;
+    object-fit: contain;
+}
+.cart_product h3{
+    width: 60%;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+.cart_product .count{
+    width: 20%;
+}
+.cart_product .del{
+    width: 10%;
+}
+.cart_product .count input{
+    width: 30%;
+    display: inline;
+}
+.sendOrder{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.content > form{
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    width: 300px
+}
+.content > form input{
+    display: block;
+    margin: 10px;
+}

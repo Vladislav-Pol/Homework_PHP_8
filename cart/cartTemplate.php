@@ -28,9 +28,9 @@
 </div>
 <div class="sendOrder content">
     <form id="bayerData" action="" method="post">
-        <label><input type="text" name="bayerName" placeholder="Name" value="Name">Введите ваше имя</label><br/>
-        <label><input type="email" name="bayerEmail" placeholder="v_polonik@inbox.ru" value="v_polonik@inbox.ru">Введите email</label><br/>
-        <label><input type="text" name="bayerPhone" placeholder="+375 29 123 12 12" value="+375 29 123 12 12">Введите телефон</label><br/>
-        <button name="order">Заказать</button>
+        <label>Введите ваше имя<input type="text" name="bayerName" placeholder="Name" value="Name"></label><br/>
+        <label>Введите email<input type="email" name="bayerEmail" placeholder="v_polonik@inbox.ru" value="v_polonik@inbox.ru"></label><br/>
+        <label>Введите телефон<input type="text" name="bayerPhone" placeholder="+375 29 123 12 12" value="+375 29 123 12 12"></label><br/>
+        <input type="submit" name="order" value="Заказать">
     </form>
 </div>

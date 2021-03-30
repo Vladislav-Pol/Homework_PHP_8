@@ -43,7 +43,10 @@ function delFromCart(&$cartData, $delItem)
 
 function getCartCount($cartData)
 {
-    return count($cartData);
+    $count = 0;
+    if (is_array($cartData))
+        $count = count($cartData);
+    return $count;
 }
 
 function getCartCost($cartData)

@@ -1,0 +1,107 @@
+@media (max-width: 1024px){
+    .top_footer * {
+        font-size: 13px;
+    }
+    .content {
+        max-width: 90vw;
+    }
+    .services .items .block:not(:last-child){
+        padding-right: 20px;
+    }
+    .top_footer .left,
+    .top_footer .middle{
+        padding-right: 20px;
+    }
+}
+@media (max-width: 1000px) {
+    .burger_menu, input[type = checkbox]#burgerCheck {
+        display: block;
+    }
+
+    input[type = checkbox]#burgerCheck:checked, input[type = checkbox]#burgerCheck:checked + .burger_menu {
+        position: fixed;
+        right: 5vw;
+    }
+
+    ul.nav {
+        display: none;
+    }
+
+    input[type = checkbox]:checked ~ .nav {
+        display: flex;
+    }
+    .cart{
+        margin-right: 60px;
+    }
+    .product{
+        width: calc(50% - 40px);
+}
+@media (max-width: 900px){
+    .footer .bottom_footer .social{
+        left: 100%;
+        transform: translate(-100%, -50%);
+    }
+    .latest_projects {
+        background: none;
+    }
+}
+@media (max-width: 767px){
+    .portfolio h1 {
+        font-size: 3em;
+    }
+    .services .title h2, .latest_projects .title h2 {
+        font-size: 2em;
+    }
+    .services .items {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .services .items p {
+        max-width: 220px;
+    }
+    .advantages h2 {
+        font-size: 2em;
+    }
+    .footer .top_footer .content {
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+}
+@media (max-width: 550px) {
+    .latest_projects .list .element {
+        margin-top: 40px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .latest_projects .list .element .text{
+        width: 90vw;
+        text-align: center;
+    }
+    .footer .top_footer .content .column{
+        width: 90vw;
+    }
+    .footer .bottom_footer {
+        display: flex;
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+    }
+    .footer .bottom_footer p{
+        padding-top: 0;
+    }
+    .footer .bottom_footer .social {
+        display: flex;
+        position: unset;
+        transform: unset;
+        width: 500px;
+        justify-content: center;
+        padding: 15px;
+    }
+    .product{
+        width: calc(100% - 40px);
+}
+@media (max-width: 375px) {
+    .cart .cost{
+        display: none;
+    }
+}
+

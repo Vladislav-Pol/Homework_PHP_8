@@ -7,9 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/media.css">
-    <title><?= isset($_GET["id"]) ? $arPages[$_GET["id"]]["name"]: "Treehouse"?></title>
+    <title><?= isset($_GET["id"]) ? $arPages[$_GET["id"]]["name"] : "Treehouse" ?></title>
 </head>
 <body>
+
 <header class="content">
     <div class="logo">
         <a href="/"></a>
@@ -25,24 +26,16 @@
         <span></span>
     </div>
     <ul class="nav">
-        <?foreach($arMenu as $link => $name):?>
-        <li><a href="<?=$link?>"><?=$name?></a></li>
-        <?endforeach;?>
+        <? foreach ($arMenu as $link => $name): ?>
+            <li><a href="<?= $link ?>"><?= $name ?></a></li>
+        <?endforeach; ?>
     </ul>
-    <div class="auth">
-        <? if(!$userAuth):?>
-        <a href="/auth">Войти или зарегистрироваться</a>
-        <? else:?>
-        <p>Здравствуйте, <?=$_SESSION['user']['name']?></p>
-        <a href="./?logout">Выйти</a>
-        <? endif;?>
-    </div>
     <div class="cart">
-                <a href="/cart/"></a>
-                <img src="/image/shopping-cart.png" alt="cart">
-                <div class="count"><?=$cartCount?></div>
-                <div class="cost"><?=$cartCost?> руб.</div>
-            </div>
+        <a href="/cart/"></a>
+        <img src="/image/shopping-cart.png" alt="cart">
+        <div class="count"><?= $cartCount ?></div>
+        <div class="cost"><?= $cartCost ?> руб.</div>
+    </div>
 </header>
 <main>
 <?php
