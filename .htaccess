@@ -15,7 +15,7 @@ RewriteRule ^(catalog/).*_(\d+)$ $1?prodId=$2 [L]
 # доступ только к index.php
 RewriteCond %{REQUEST_URI} !^/(index.php)?$
 RewriteCond %{REQUEST_URI} !^(/auth/(index.php)?)$
-RewriteCond %{REQUEST_URI} !^(/admin/(index.php)?)$
+RewriteCond %{REQUEST_URI} !^(/admin/(index.php)?)
 RewriteCond %{REQUEST_URI} !^(/cart/(index.php)?)$
 RewriteCond %{REQUEST_URI} !^(/cart/(cartChange.php)?)$
 RewriteCond %{REQUEST_URI} !^(/catalog/(index.php)?)$

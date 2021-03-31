@@ -35,6 +35,7 @@
     }
     .product{
         width: calc(50% - 40px);
+    }
 }
 @media (max-width: 900px){
     .footer .bottom_footer .social{
@@ -98,6 +99,7 @@
     }
     .product{
         width: calc(100% - 40px);
+    }
 }
 @media (max-width: 375px) {
     .cart .cost{
