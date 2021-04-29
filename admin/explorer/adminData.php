@@ -30,33 +30,28 @@ else
 //Элемент для создания
 $create = isset($_REQUEST['create']) ? true : false;
 
-
-require_once './functions/main.php';
-
-require_once './functions/crud.php';
-
 //Изменение элемента
 if (isset($_REQUEST['saveElement'])) {
     if ($_REQUEST['extension'] == 'folder')
-        renameFolder($fullPath . $_REQUEST['oldName'], $fullPath . $_REQUEST['fileName']);
+        ExplorerModel::renameFolder($fullPath . $_REQUEST['oldName'], $fullPath . $_REQUEST['fileName']);
     else
-        editFile($fullPath, $_REQUEST['oldName'] . $_REQUEST['oldFileExtension'], $_REQUEST['fileName'] . $_REQUEST['extension'], $_REQUEST['fileContent'] ?? "");
+        ExplorerModel::editFile($fullPath, $_REQUEST['oldName'] . $_REQUEST['oldFileExtension'], $_REQUEST['fileName'] . $_REQUEST['extension'], $_REQUEST['fileContent'] ?? "");
 }
 //Создание элемента
 elseif (isset($_REQUEST['saveNewElement'])) {
     if ($_REQUEST['extension'] == 'folder')
-        createNewFolder($fullPath, $_REQUEST['fileName']);
+        ExplorerModel::createNewFolder($fullPath, $_REQUEST['fileName']);
     else
-        createNewFile($fullPath, $_REQUEST['fileName'], $_REQUEST['extension'], $_REQUEST['fileContent'] ?? "");
+        ExplorerModel::createNewFile($fullPath, $_REQUEST['fileName'], $_REQUEST['extension'], $_REQUEST['fileContent'] ?? "");
 }
 //Удаление папки или файла
 elseif (isset($_REQUEST['del'])) {
-    deleteElement($fullPath . $_REQUEST['del']);
+    ExplorerModel::deleteElement($fullPath . $_REQUEST['del']);
 }
 //Запись загруженного файла
 elseif (isset($_REQUEST['isUpload'])) {
     require_once './functions/upload.php';
-    saveUploadFile($fullPath);
+    ExplorerModel::saveUploadFile($fullPath);
 }
 
 //Получение содержимого каталога

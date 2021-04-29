@@ -1,4 +1,4 @@
-RewriteEngine On
+#RewriteEngine On
 RewriteBase /
 
 #Обрезает index.php
@@ -21,4 +21,7 @@ RewriteCond %{REQUEST_URI} !^(/cart/(cartChange.php)?)$
 RewriteCond %{REQUEST_URI} !^(/catalog/(index.php)?)$
 RewriteCond %{REQUEST_URI} !^/catalog/\?prodId=\d+$
 RewriteCond %{REQUEST_URI} !^(/img)|^(/image)|^(/css)
+
+RewriteCond %{REQUEST_URI} !^/(123.php)?$
+
 RewriteRule ^ 404.php

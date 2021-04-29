@@ -1,5 +1,6 @@
 <?php
 require_once '../../data.php';
+require_once DOCUMENT_ROOT . '/classes/ExplorerModel.php';
 
 if(!in_array('admin', $userGroups)){
     header('Location: /');

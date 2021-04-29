@@ -1,16 +1,4 @@
 <?php
-function getCatalogData($arOptions)
-{
-    $ch = curl_init();
-    curl_setopt_array($ch, $arOptions);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    if ($result == "null")
-        return false;
-    $arResult = json_decode($result, true);
-    fixUrlInData($arResult);
-    return $arResult;
-}
 
 function fixUrlInData(&$arData)
 {
@@ -100,16 +88,25 @@ function addProductToXML()//todo
 
 function updateLocalBase($arOptions)
 {
-    if(file_exists(BD_PATH)
-        && (time() - filemtime(BD_PATH)) < TIME_ACTUAL_DB){
-        return 'Local base is actual';
+    $db = new DB();
+    return $db->updateLocalBase('Products', $arOptions);
+
+
+}
+
+function updateLocalImagesBase($data)
+{
+    foreach ($data as &$product){
+//        if(file_exists($product['image'])){
+            $image = file_get_contents($product['image']);
+            $fileData = pathinfo($product['image']);
+            $fileName = $fileData['basename'];
+            $newFilePath = DOCUMENT_ROOT . '/image/' . $fileName;
+            file_put_contents($newFilePath, $image);
+            $product['image'] = '/image/' . $fileName;
+//        }
     }
-    if(($newData = getCatalogData($arOptions)) !== false){
-        $jsonData = json_encode($newData);
-        file_put_contents(BD_PATH, $jsonData);
-        return 'Update success';
-    }
-    return "Base is not actual, update Error";
+    return $data;
 }
 
 function getLocalCatalogData($id = false)
