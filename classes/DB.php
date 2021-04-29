@@ -5,42 +5,107 @@ class DB
 {
     protected $mySqlI;
 
-    /**Функция чтения должна принимать параметры (arSelect[список возвращаемых полей], arFilter[массив для фильтрации вида поле->значение], arOrder[массив для сортировки вида поле->asc|desc], arLimit[ограничение выборки параметры offset->, limit->])
-     * @param null $arSelect - список возвращаемых полей
-     * @param null $arFilter - массив для фильтрации вида поле->значение
-     * @param null $arOrder - массив для сортировки вида поле->asc|desc
+    private static $instances = [];
+
+    /**
+     * @param $table - имя обрабатываемой таблицы
+     * @param null $arSelect - массив возвращаемых полей
+     * @param null $arFilter - массив фильтров состоящий из массивов с элементами [field, operation, value]
+     * @param null $arOrder - массив массивов для сортировки вида поле->asc|desc
      * @param null[] $arLimit - ограничение выборки параметры offset->, limit->
      */
-    public function get($arSelect = null, $arFilter = null, $arOrder = null, $arLimit = ['offset' => null, 'limit' => null])
+    public function get($table, $arSelect = null, $arFilter = null, $arOrder = null, $arLimit = ['offset' => 0, 'limit' => null])
     {
+        $query = "SELECT ";
 
+        if ($arSelect === null) {
+            $query .= "* ";
+        } else {
+            foreach ($arSelect as $item) {
+                $query .= $this->mySqlI->real_escape_string($item) . ", ";
+            }
+            $query = preg_replace('/, $/', '', $query);
+        }
+
+        $query .= " FROM " . $this->mySqlI->real_escape_string($table);
+
+        if ($arFilter !== null){
+            $query .= " WHERE ";
+            foreach ($arFilter as $filter){
+                $query .= $this->mySqlI->real_escape_string($filter[0]) . " ";
+                $query .= $this->mySqlI->real_escape_string($filter[1]) . " ";
+                $query .= $this->mySqlI->real_escape_string($filter[2]) . " AND ";
+            }
+            $query = preg_replace('/ AND $/', '', $query);
+        }
+
+        if ($arOrder !== null){
+            $query .= " ORDER BY ";
+            foreach ($arOrder as $field => $type){
+                $query .= $this->mySqlI->real_escape_string($field) . " ";
+                $query .= $this->mySqlI->real_escape_string($type) . ", ";
+            }
+            $query = preg_replace('/, $/', '', $query);
+        }
+
+        if ($arLimit['limit'] !== null){
+            $query .= " LIMIT " . $this->mySqlI->real_escape_string($arLimit['offset']) . ", ";
+            $query .= $this->mySqlI->real_escape_string($arLimit['limit']);
+        }
+
+        $result = $this->mySqlI->query($query);
+        return $data = $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getLocalCatalogData($id = false)
+    {
+        $query = "SELECT * FROM Products";
+
+        if ($id !== false) {
+            $query .= " WHERE id = {$this->mySqlI->real_escape_string($id)}";
+        }
+        $result = $this->mySqlI->query($query);
+        return $data = $result->fetch_all(MYSQLI_ASSOC);
     }
 
     /** метод обновляет данные в БД
-     * @param $table
      * @param $arData
      * @return string
      */
-    public function updateLocalBase($table, $arData)
+    public function updateLocalBase($arData)
     {
         if (file_exists(BD_PATH)
             && (time() - filemtime(BD_PATH)) < TIME_ACTUAL_DB) {
             return 'Local base is actual';
         }
         if (($newData = $this->getCatalogData($arData)) !== false) {
-            $newData = updateLocalImagesBase($newData);
+            $newData = $this->updateLocalImagesBase($newData);
 
             foreach ($newData as $product) {
                 $arProps = array_intersect_key($product, array_flip(['id', 'title', 'price', 'description', 'image']));
                 $arProps['api_id'] = $arProps['id'];
                 unset($arProps['id']);
-                $this->put($table, $arProps);
+                $this->put('Products', $arProps);
             }
-            $jsonData = json_encode($newData);
-            file_put_contents(BD_PATH, $jsonData);
+//            $jsonData = json_encode($newData);
+//            file_put_contents(BD_PATH, $jsonData);
+            file_put_contents(BD_PATH, '');
             return 'Update success';
         }
         return "Base is not actual, update Error";
+    }
+
+    protected function updateLocalImagesBase($data)
+    {
+        foreach ($data as &$product) {
+            $image = file_get_contents($product['image']);
+            $fileData = pathinfo($product['image']);
+            $fileName = $fileData['basename'];
+            $newFilePath = DOCUMENT_ROOT . '/image/' . $fileName;
+            file_put_contents($newFilePath, $image);
+            $product['image'] = '/image/' . $fileName;
+        }
+        return $data;
     }
 
     /** метод забирает данные с API и возвращает в виде массива
@@ -116,4 +181,26 @@ class DB
     {
         $this->mySqlI->close();
     }
+
+    public static function getInstance()
+    {
+        $subclass = static::class;
+        if (!isset(self::$instances[$subclass])) {
+            self::$instances[$subclass] = new static();
+        }
+        return self::$instances[$subclass];
+    }
+
+    /**
+     * Клонирование и десериализация не разрешены для одиночек.
+     */
+    protected function __clone()
+    {
+    }
+
+    public function __wakeup()
+    {
+        throw new \Exception("Cannot unserialize singleton");
+    }
+
 }

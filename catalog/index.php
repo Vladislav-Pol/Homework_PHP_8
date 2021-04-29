@@ -2,16 +2,19 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/data.php';
 
-updateLocalBase($arOptions);
+DB::getInstance()->updateLocalBase($arOptions);
 
 
 if (($prodId = $_GET['prodId']) != false) {
-    $productData = getLocalCatalogData($prodId);
+    $productData = DB::getInstance()->getLocalCatalogData($prodId)[0];
     $title = $productData['title'];
     $template = 'catalogDetailTemplate.php';
 }
 else {
-    $arCatalogData = getLocalCatalogData();
+    $arCatalogData = DB::getInstance()->get('Products', $_GET['select'], $_GET['filter'], $_GET['order'], ['offset' => $_GET['offset']?: 0, 'limit' => $_GET['limit']]);
+
+
+//    $arCatalogData = DB::getInstance()->getLocalCatalogData();
     addLinkDetail($arCatalogData);
 
     $title = "Каталог";

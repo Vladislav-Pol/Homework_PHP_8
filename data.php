@@ -2,7 +2,7 @@
 define ('DOCUMENT_ROOT', $_SERVER['DOCUMENT_ROOT']);
 define('BD_PATH', DOCUMENT_ROOT . '/bd/products.json');
 define('USERS_PATH', DOCUMENT_ROOT . '/bd/users.json');
-define('TIME_ACTUAL_DB', '12');
+define('TIME_ACTUAL_DB', '1200');
 $arOptions = [
     CURLOPT_URL => "https://fakestoreapi.com/products",
     CURLOPT_RETURNTRANSFER => true,

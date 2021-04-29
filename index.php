@@ -2,8 +2,8 @@
 
 require_once './data.php';
 
-updateLocalBase($arOptions);
-$arCatalogData = getLocalCatalogData();
+DB::getInstance()->updateLocalBase($arOptions);
+$arCatalogData = DB::getInstance()->getLocalCatalogData();
 addLinkDetail($arCatalogData);
 //$arCatalogData = getCatalogData($arOptions);
 $title = "Главная страница";

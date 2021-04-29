@@ -1,4 +1,4 @@
-#RewriteEngine On
+RewriteEngine On
 RewriteBase /
 
 #Обрезает index.php
@@ -9,7 +9,7 @@ RewriteCond %{REQUEST_URI} /+[^\.]+$
 RewriteRule ^/(.+[^/])$ /$1/ [R=301,L]
 
 #ЧПУ каталога
-RewriteCond %{REQUEST_URI} ^/catalog.+_\d$
+RewriteCond %{REQUEST_URI} ^/catalog.+_\d{1,5}$
 RewriteRule ^(catalog/).*_(\d+)$ $1?prodId=$2 [L]
 
 # доступ только к index.php

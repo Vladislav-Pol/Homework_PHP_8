@@ -13,7 +13,7 @@ function fixUrlInData(&$arData)
 
 function addToCart(&$cartData, $addItem)
 {
-    if (($product = getLocalCatalogData($addItem)) != false) {
+    if (($product = DB::getInstance()->getLocalCatalogData($addItem)) != false) {
         ++$cartData[$addItem];
         setcookie('cart', serialize($cartData), 0, '/');
     }
@@ -42,14 +42,8 @@ function getCartCost($cartData)
     $sum = 0;
     if (is_array($cartData))
         foreach ($cartData as $id => $count)
-            $sum += getLocalCatalogData($id)['price'] * $count;
+            $sum += DB::getInstance()->getLocalCatalogData($id)['price'] * $count; //todo
     return $sum;
-}
-
-function getProductDataById($id)
-{
-    updateLocalBase($GLOBALS['arOptions']);
-    return getLocalCatalogData($id);
 }
 
 function getFullCartData($cartData)
@@ -58,7 +52,7 @@ function getFullCartData($cartData)
         return false;
     $fullCartData = [];
     foreach ($cartData as $id => $count) {
-        $cartItem = getProductDataById($id);
+        $cartItem = DB::getInstance()->getLocalCatalogData($id);
         $cartItem['count'] = $count;
         $cartItem['cost'] = $cartItem['price'] * $count;
         $fullCartData[] = $cartItem;
@@ -84,44 +78,6 @@ function addProductToXML()//todo
 {
     $fileName = $_SERVER['DOCUMENT_ROOT'] . "/bd/products.xml";
     $xd = xmlwriter_open_uri($fileName);
-}
-
-function updateLocalBase($arOptions)
-{
-    $db = new DB();
-    return $db->updateLocalBase('Products', $arOptions);
-
-
-}
-
-function updateLocalImagesBase($data)
-{
-    foreach ($data as &$product){
-//        if(file_exists($product['image'])){
-            $image = file_get_contents($product['image']);
-            $fileData = pathinfo($product['image']);
-            $fileName = $fileData['basename'];
-            $newFilePath = DOCUMENT_ROOT . '/image/' . $fileName;
-            file_put_contents($newFilePath, $image);
-            $product['image'] = '/image/' . $fileName;
-//        }
-    }
-    return $data;
-}
-
-function getLocalCatalogData($id = false)
-{
-    $jsonData = file_get_contents(BD_PATH);
-    $data = json_decode($jsonData, true);
-    if($id === false){
-        return $data;
-    }
-    foreach ($data as $item) {
-        if($item['id'] == $id){
-            return $item;
-        }
-    }
-    return false;
 }
 
 function addLinkDetail(&$arCatalogData)
